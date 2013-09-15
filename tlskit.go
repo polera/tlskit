@@ -8,7 +8,11 @@ import (
 	"net/http"
 )
 
-type TLSRequest []struct {
+type TLSRequest struct {
+    Requests []Request
+}
+
+type Request struct{
 	Server string `json:"server"`
 	Port   int32  `json:"port"`
 }
@@ -44,7 +48,7 @@ const (
 
 func Lookup(request TLSRequest) ([]Response, error) {
 
-	jsonRequest, _ := json.Marshal(request)
+	jsonRequest, _ := json.Marshal(request.Requests)
 	url := fmt.Sprintf("http://%s%s", API_HOST, API_PATH)
 	req, err := http.Post(url,
 		"application/json",
