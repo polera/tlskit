@@ -44,7 +44,6 @@ const (
 
 func Lookup(request TLSRequest) ([]Response, error) {
 
-	//	m := TLSRequest{{"uncryptic.com", 443}, {"amazon.com", 443}}
 	jsonRequest, _ := json.Marshal(request)
 	url := fmt.Sprintf("http://%s%s", API_HOST, API_PATH)
 	req, err := http.Post(url,
@@ -71,5 +70,5 @@ func Lookup(request TLSRequest) ([]Response, error) {
 	for i, child := range *r {
 		responses[i] = child.Response
 	}
-    return responses, nil
+	return responses, nil
 }
